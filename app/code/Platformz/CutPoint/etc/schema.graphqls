@@ -1,0 +1,58 @@
+# Platformz_CutPoint GraphQL extensions
+
+"""
+Input selection for manufactured products (per product sheet mapping).
+"""
+input CutPointManufactureSelectionInput {
+  manufacturer: String!
+  model: String!
+  size: String!
+}
+
+extend input CartItemInput {
+  """
+  Manufacturer/model/size selection for manufacture products.
+  """
+  manufacture_selection: CutPointManufactureSelectionInput
+}
+
+type CutPointSizeOption {
+  size: String!
+  cut_point: String!
+  additional_info: String
+}
+
+type CutPointModelOption {
+  model: String!
+  sizes: [CutPointSizeOption!]!
+}
+
+type CutPointManufacturerOption {
+  manufacturer: String!
+  models: [CutPointModelOption!]!
+}
+
+extend type ProductInterface {
+  """
+  Dependent manufacture options for this product (manufacturer -> model -> size).
+  """
+  cutpoint_options: [CutPointManufacturerOption!]!
+    @resolver(class: "\\Platformz\\CutPoint\\Model\\Resolver\\Product\\CutPointOptions")
+}
+
+type CutPointCartItemInfo {
+  manufacturer: String!
+  model: String!
+  size: String!
+  cut_point: String!
+  additional_info: String
+}
+
+extend interface CartItemInterface {
+  """
+  Selected manufacture options (saved on quote item additional_options).
+  """
+  cutpoint_info: CutPointCartItemInfo
+    @resolver(class: "\\Platformz\\CutPoint\\Model\\Resolver\\CartItem\\CutPointInfo")
+}
+
