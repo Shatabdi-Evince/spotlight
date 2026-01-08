@@ -1,0 +1,77 @@
+<?php
+/** @var \Platformz\CutPoint\Block\Adminhtml\Import\Edit $block */
+?>
+
+<div class="page-main-actions">
+    <div class="page-actions">
+        <div class="page-actions-inner">
+            <div class="page-actions-buttons">
+                <button type="submit" class="action-primary" form="platformz-cutpoint-import-form">
+                    <span><?= $block->escapeHtml(__('Import')) ?></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="platformz-cutpoint-import-form"
+      action="<?= $block->escapeUrl($block->getFormAction()) ?>"
+      method="post"
+      enctype="multipart/form-data">
+    <?= $block->getBlockHtml('formkey') ?>
+
+    <fieldset class="admin__fieldset">
+        <legend class="admin__legend">
+            <span><?= $block->escapeHtml(__('CutPoint Matrix Import')) ?></span>
+        </legend>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="product_sku">
+                <span><?= $block->escapeHtml(__('Product SKU')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input class="admin__control-text"
+                       type="text"
+                       name="product_sku"
+                       id="product_sku"
+                       required="required"
+                       placeholder="<?= $block->escapeHtmlAttr(__('e.g. SKU-123')) ?>"/>
+                <div class="note">
+                    <?= $block->escapeHtml(__('Import is per product. Provide the SKU whose sheet you are uploading.')) ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="import_file">
+                <span><?= $block->escapeHtml(__('File')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input class="admin__control-file"
+                       type="file"
+                       name="import_file"
+                       id="import_file"
+                       required="required"
+                       accept=".csv,.xlsx"/>
+                <div class="note">
+                    <?= $block->escapeHtml(__('Accepted: CSV (recommended) or XLSX (requires PhpSpreadsheet).')) ?>
+                    <br/>
+                    <?= $block->escapeHtml(__('Required columns: Manufacturer, Model, Size, CutPoint. Optional: Additional Info.')) ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="replace_existing">
+                <span><?= $block->escapeHtml(__('Replace existing rows')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="checkbox" name="replace_existing" id="replace_existing" value="1"/>
+                <div class="note">
+                    <?= $block->escapeHtml(__('If checked, all existing rows for this SKU will be deleted before import.')) ?>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Declarative schema for Platformz_CutPoint
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="platformz_cutpoint_matrix" resource="default" engine="innodb" comment="Platformz CutPoint Matrix">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="varchar" name="manufacturer" length="255" nullable="false" comment="Manufacturer"/>
+        <column xsi:type="varchar" name="model" length="255" nullable="false" comment="Model"/>
+        <column xsi:type="varchar" name="size" length="64" nullable="false" comment="Size"/>
+        <column xsi:type="varchar" name="cut_point" length="64" nullable="false" comment="Cut Point"/>
+        <column xsi:type="text" name="additional_info" nullable="true" comment="Additional Info"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true"
+                comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <constraint xsi:type="unique" referenceId="PLATFORMZ_CUTPOINT_MATRIX_UNQ_PRODUCT_MFR_MODEL_SIZE">
+            <column name="product_id"/>
+            <column name="manufacturer"/>
+            <column name="model"/>
+            <column name="size"/>
+        </constraint>
+
+        <index referenceId="PLATFORMZ_CUTPOINT_MATRIX_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+
+        <constraint xsi:type="foreign" referenceId="PLATFORMZ_CUTPOINT_MATRIX_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ID"
+                    table="platformz_cutpoint_matrix" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>
+

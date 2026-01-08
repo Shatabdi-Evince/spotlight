@@ -1,0 +1,20 @@
+{
+  "name": "platformz/module-cutpoint",
+  "description": "Per-product manufacturer/model/size CutPoint matrix with GraphQL add-to-cart support.",
+  "type": "magento2-module",
+  "license": [
+    "proprietary"
+  ],
+  "require": {
+    "php": "^8.1"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Platformz\\\\CutPoint\\\\": ""
+    }
+  }
+}
+

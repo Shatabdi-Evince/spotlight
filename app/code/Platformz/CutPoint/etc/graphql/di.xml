@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Extend default GraphQL addProductsToCart input handling -->
+    <type name="Magento\QuoteGraphQl\Model\Resolver\AddProductsToCart">
+        <plugin name="platformz_cutpoint_add_products_to_cart_args"
+                type="Platformz\CutPoint\Plugin\QuoteGraphQl\Resolver\AddProductsToCartPlugin"
+                sortOrder="10"/>
+    </type>
+
+    <!-- Add a GraphQL-only buyRequest provider for the DTO-based cart pipeline -->
+    <type name="Magento\Quote\Model\Cart\BuyRequest\BuyRequestBuilder">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="platformz_cutpoint" xsi:type="object">Platformz\CutPoint\Model\Cart\BuyRequest\CutPointDataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
+
