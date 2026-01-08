@@ -6,6 +6,7 @@ mapping table, stores the selection on the quote item, and exposes everything vi
 ### What this module adds
 
 - **DB table**: `platformz_cutpoint_matrix` keyed by `(product_id, manufacturer, model, size)`
+- **Admin import**: Catalog → CutPoint Matrix → Import (upload CSV/XLSX per product SKU)
 - **Product GraphQL**: `ProductInterface.cutpoint_options` returns dependent options for UI dropdowns
 - **Cart add GraphQL**: extends `CartItemInput` with `manufacture_selection`
 - **Persistence**: saves selection as quote item `additional_options` (flows to order/invoice/email automatically)
@@ -83,4 +84,12 @@ mutation($cartId: String!) {
 - A GraphQL-only buyRequest provider injects `platformz_cutpoint` into the buy request.
 - A quote `addProduct` plugin validates against `platformz_cutpoint_matrix`, derives cut point & info, and writes it to
   the quote item as `additional_options` (JSON).
+
+### Admin import notes
+
+- **CSV is recommended** (works out of the box).
+- **XLSX** requires `phpoffice/phpspreadsheet` to be installed in the Magento application.
+- The importer expects headers matching your sheet (case-insensitive):
+  - `Manufacturer`, `Model`, `Size`, `CutPoint` (or `Cut Point`)
+  - Optional: `Additional Info`
 

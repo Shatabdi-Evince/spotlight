@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+    <menu>
+        <add id="Platformz_CutPoint::cutpoint"
+             title="CutPoint Matrix"
+             module="Platformz_CutPoint"
+             sortOrder="90"
+             parent="Magento_Catalog::catalog"
+             resource="Platformz_CutPoint::cutpoint"/>
+        <add id="Platformz_CutPoint::import"
+             title="Import"
+             module="Platformz_CutPoint"
+             sortOrder="10"
+             parent="Platformz_CutPoint::cutpoint"
+             action="platformz_cutpoint/import/index"
+             resource="Platformz_CutPoint::import"/>
+    </menu>
+</config>
+

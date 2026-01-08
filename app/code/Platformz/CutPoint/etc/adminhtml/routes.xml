@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="platformz_cutpoint" frontName="platformz_cutpoint">
+            <module name="Platformz_CutPoint"/>
+        </route>
+    </router>
+</config>
+
