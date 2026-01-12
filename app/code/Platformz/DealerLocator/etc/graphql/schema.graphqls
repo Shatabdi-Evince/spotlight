@@ -1,0 +1,32 @@
+"""
+Platformz Dealer Locator - Get coordinates from address fields.
+"""
+type Query {
+  """
+  Returns latitude/longitude for the provided address fields.
+  """
+  dealerLocatorCoordinates(input: DealerLocatorAddressInput!): DealerLocatorCoordinates
+    @resolver(class: "Platformz\\DealerLocator\\Model\\Resolver\\DealerLocatorCoordinates")
+}
+
+"""
+Input fields used to build the geocoding query.
+"""
+input DealerLocatorAddressInput {
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  country: String!
+  postal_code: String!
+}
+
+"""
+Coordinates returned from geocoding.
+"""
+type DealerLocatorCoordinates {
+  latitude: Float!
+  longitude: Float!
+  display_name: String
+}
+

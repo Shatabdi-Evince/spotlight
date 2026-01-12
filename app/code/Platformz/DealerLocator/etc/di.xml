@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Platformz_DealerLocator
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Platformz\DealerLocator\Model\Geocoding\GeocoderInterface"
+                type="Platformz\DealerLocator\Model\Geocoding\CompositeGeocoder"/>
+</config>
+
