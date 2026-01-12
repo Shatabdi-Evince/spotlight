@@ -11,14 +11,14 @@ type Query {
 
 """
 Input fields used to build the geocoding query.
-All fields are optional, but at least one must be provided.
 """
 input DealerLocatorAddressInput {
-  address: String
-  city: String
-  state: String
-  country: String
-  pin: String
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  country: String!
+  postal_code: String!
 }
 
 """
